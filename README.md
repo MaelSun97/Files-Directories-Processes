@@ -4,7 +4,7 @@ Project 01 - README
 Members
 -------
 
-- Domer McDomerson (dmcdomer@nd.edu)
+- Ruochen Sun (rsun2@nd.edu)
 
 Responses
 ---------
