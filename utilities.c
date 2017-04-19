@@ -24,9 +24,13 @@ bool        is_directory_empty(const char *path) {
 			return true;
 			closedir(path);
 		}
-	}
-	else{
-    	return false;
+		else{
+    		return false;
+    	}
+    }
+    else{
+    	fprintf(stderr, "%s", strerror(errno));
+    	return EXIT_FAILURE;
     }
 }
 
