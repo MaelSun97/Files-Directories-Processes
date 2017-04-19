@@ -16,6 +16,15 @@ execute.o: execute.c
 filter.o: filter.c
 	@$(CC) $(CFLAGS) -c -o filter.o filter.c
 	@echo "Compiling filter.o..."
+search.o: search.c
+	@$(CC) $(CFLAGS) -c -o search.o search.c
+	@echo "Compiling search.o..."
+utilities.o: utilities.c
+	@$(CC) $(CFLAGS) -c -o utilities.o utilities.c
+	@echo "Compiling utilities.o..."
+search: main.o execute.o filter.o search.o utilities.o
+	@$(AR) $(ARFLAGS) search main.o execute.o filter.o search.o utilities.o
+	@echo "Linking search..."
 test:		search test_search.sh
 	@echo Testing $<...
 	@./test_search.sh
