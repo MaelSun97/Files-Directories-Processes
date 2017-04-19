@@ -16,6 +16,10 @@
  * @return  Whether or not the search was successful.
  */
 int	    search(const char *root, const Settings *settings) {
+	struct dirent *ent;
+	if((root = opendir(".")) != NULL){
+		while ((ent = readdir(root)) != NULL){
+			if((
     return EXIT_SUCCESS;
 }
 
