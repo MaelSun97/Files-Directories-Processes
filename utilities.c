@@ -30,7 +30,7 @@ bool        is_directory_empty(const char *path) {
     }
     else{
     	fprintf(stderr, "%s", strerror(errno));
-    	return EXIT_FAILURE;
+    	return 0;
     }
 }
 
@@ -43,7 +43,7 @@ time_t      get_mtime(const char *path) {
     struct stat s;
     if (stat(path, &s)<0){
         fprintf(stderr, "%s", strerror(errno));
-        return EXIT_FAILURE;
+        return 0;
 }
     return s.st_mtim;
 }
