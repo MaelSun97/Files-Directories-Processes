@@ -16,7 +16,18 @@
  * @return  Whether or not a directory is empty.
  */
 bool        is_directory_empty(const char *path) {
-    return false;
+	DIR *path;
+	struct dirent *ent;
+	
+	if((path = opendir(".")) != NULL){
+		if ((ent=readdir(path)) != NULL){
+			return true;
+			closedir(path);
+		}
+	}
+	else{
+    	return false;
+    }
 }
 
 /**
