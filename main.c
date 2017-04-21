@@ -56,6 +56,12 @@ int	    main(int argc, char *argv[]) {
 	else{
 		settings.type |= S_IFDIR;
 	}
+	if(streq(arg, "-empty")){
+		settings.empty = 1;
+	}
+	if(streq(arg, "-name")){
+		settings.name = strcpy()//next argument
+	}
     return EXIT_SUCCESS;
 }
 
