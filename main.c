@@ -35,6 +35,33 @@ void	    usage(const char *program_name, int status) {
 /* Main Execution */
 
 int	    main(int argc, char *argv[]) {
+	Settings settings = {
+	.access = 0,
+	.uid = -1,
+	.gid = -1,
+	};
+	//you have to find the type first. next argument
+	if (streq(arg, "-executable")){
+		settings.access |= X_OK;
+	}
+	else if(streq(arg, "-readable")){
+		settings.access |= R_OK;
+	}
+	else if(streq(arg, "-writable")){
+		settings.access |= W_OK;
+	}
+	if(streq(arg, "f")){
+		settings.type |= S_IFREG;
+	}
+	else{
+		settings.type |= S_IFDIR;
+	}
+	if(streq(arg, "-empty")){
+		settings.empty = 1;
+	}
+	if(streq(arg, "-name")){
+		settings.name = strcpy()//next argument
+	}
     return EXIT_SUCCESS;
 }
 
