@@ -31,11 +31,9 @@ int	    search(const char *root, const Settings *settings) {
         strcat(str, '/');
         strcat(str, ent->d_name);
 
-        if (ent->d_type == DT_DIR){
-            search(str, settings);
-        }
-        else if (filter(str, settings) == 0) execute(str, settings);
-        }
+        if (filter(str, settings) == 0) execute(str, settings);
+        if (ent->d_type == DT_DIR) search(str, settings);
+    }
     closedir(d);   
     return 0;
 }
