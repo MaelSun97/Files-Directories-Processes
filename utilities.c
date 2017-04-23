@@ -16,22 +16,20 @@
  * @return  Whether or not a directory is empty.
  */
 bool        is_directory_empty(const char *path) {
-//	DIR *path;
+	DIR *d=opendir(path);
 	struct dirent *ent;
 	
-	if((path = opendir(".")) != NULL){
-		if ((ent=readdir(path)) != NULL){
-			return true;
-			closedir(path);
-		}
-		else{
-    		return false;
-    	}
-    }
-    else{
-    	fprintf(stderr, "%s", strerror(errno));
-    	return 0;
-    }
+	if(d ==NULL){
+		fprintf(stderr, "%s", strerror(errno));
+	return false;
+	}
+	int count;
+	while (ent = readdir(d)){
+		count++;
+	}
+	closedir(d);
+	return count <= 2;//see the comment below.
+	//n in this case ... . and .. if n is less than or equal to two, return true, else return false.
 }
 
 /**
@@ -41,11 +39,11 @@ bool        is_directory_empty(const char *path) {
  */
 time_t      get_mtime(const char *path) {
     struct stat s;
-    if (stat(path, &s)<0){
+    if (lstat(path, &s) != 0){
         fprintf(stderr, "%s", strerror(errno));
         return 0;
-}
-    return s.st_mtim;
+	}
+    return s.st_mtime;
 }
 
 /* vim: set sts=4 sw=4 ts=8 expandtab ft=c: */

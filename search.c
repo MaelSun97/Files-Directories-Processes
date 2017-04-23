@@ -19,12 +19,12 @@ int	    search(const char *root, const Settings *settings) {
     struct dirent *ent;
     DIR *d = opendir(root);
     char *str;
-    if(d = NULL){
-        fprintf(stderr, "Unable to opendir on %s: %s\n", path, strerror(errno));
+    if(d == NULL){
+        fprintf(stderr, "Unable to opendir on %s: %s\n", root, strerror(errno));
         return EXIT_FAILURE;
     }
     for (ent = readdir(d); ent; ent = readdir(d)){
-        if (strcmp(e->d_name, ".") == 0 || strcmp(e->d_name, "..") == 0)            
+        if (streq(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0)            
             continue;
 
         strcpy(str, root);

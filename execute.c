@@ -18,6 +18,29 @@
  * @return  Whether or not the execution was successful.
  */
 int	    execute(const char *path, const Settings *settings) {
+	if(settings->exec_argc != 0){
+		char **exec_argv;
+		char *array[settings->exec_argc+1];//array needs to be +1 of argc b/c last things has to be a NULL
+		for(int i=0; i < settings->exec_argc;i++){
+			array[i] = settings-> exec_argv[i];//exec_argv is an array as well.
+		}
+		array[settings->exec_argc] = NULL;//the way exec_VP is written. It requires the arguments null terminated.
+		pid_t pid = fork();
+		if(pid == 0){
+			if(execvp(array[0], array) < 0)
+				_exit(EXIT_FAILURE);
+		}
+		int status = EXIT_SUCCESS;
+		while (wait(&status) != pid);
+	}
+	else{
+	puts(path);
+	}
+	
+	if(settings->exec_argc != 0 && settings->print){//in order for this to be triggered, first one is true so all u need is the second if statement.
+	puts(path);
+	}
+	
     return 0;
 }
 
