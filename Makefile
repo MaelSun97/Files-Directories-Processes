@@ -23,7 +23,7 @@ utilities.o: utilities.c
 	@$(CC) $(CFLAGS) -c -o utilities.o utilities.c
 	@echo "Compiling utilities.o..."
 search: main.o execute.o filter.o search.o utilities.o search.h
-	@$(LD) $(LDFLAGS) -o main.o execute.o filter.o search.o utilities.o
+	@$(LD) $(LDFLAGS) -o search main.o execute.o filter.o search.o utilities.o
 	@echo "Linking search..."
 test:        search test_search.sh
 	@echo Testing $<...

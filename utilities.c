@@ -28,8 +28,7 @@ bool        is_directory_empty(const char *path) {
 		count++;
 	}
 	closedir(d);
-	return count <= 2;//see the comment below.
-	//n in this case ... . and .. if n is less than or equal to two, return true, else return false.
+	return count <= 2;
 }
 
 /**

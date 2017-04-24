@@ -21,25 +21,25 @@
 bool        filter(const char *path, const Settings *settings) {
     struct stat s;
     lstat(path, &s);
-    if (settings->access != 0){//correct...we dont have the pointer.
+    if (settings->access != 0){
         if (access(path, settings->access) != 0) return true;
     }
-    if (settings->type != 0){//this is corrrecg
+    if (settings->type != 0){
         if ((s.st_mode & S_IFMT) != settings->type) return true;
     } 
-    if (settings->empty != 0){//this is tricky...
+    if (settings->empty != 0){
         if ((s.st_size != 0)) return true;
     }
-    if (settings->name != 0){//98%right
+    if (settings->name != 0){
         if (fnmatch(settings->name, basename(path), 0) != 0) return true;
     }
-    if (settings->path != 0){//correct
+    if (settings->path != 0){
         if (fnmatch(settings->path, path, 0) != 0) return true;
     }
-    if (settings->perm != 0){//fine
+    if (settings->perm != 0){
         if ((s.st_mode & (S_IRWXU | S_IRWXG | S_IRWXO)) != settings->perm) return true;
     }
-    if (settings->newer != 0){//
+    if (settings->newer != 0){
         if (s.st_mtime <= settings->newer) return true;
     }
     if (settings->uid != 0){
