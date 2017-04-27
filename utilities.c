@@ -23,11 +23,16 @@ bool        is_directory_empty(const char *path) {
 		fprintf(stderr, "%s", strerror(errno));
 	return false;
 	}
-	int count;
-	while (ent = readdir(d)){
+	size_t count=0;
+	while ((ent = readdir(d))){
 		count++;
 	}
 	closedir(d);
+	/*if(count <= 2){
+		printf("empty\n");
+	}
+	*/
+	//printf("%s\n", path);
 	return count <= 2;
 }
 
